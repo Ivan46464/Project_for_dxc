@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 
-{% block title %}
-Home
-{% endblock %}
 {% block content %}
-<h1>Home page</h1>
+{% autoescape off %}
+{{plot_div}}
+{% endautoescape %}
 {% endblock %}
