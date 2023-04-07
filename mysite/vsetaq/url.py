@@ -19,6 +19,8 @@ urlpatterns = [
     path('expenses/int:<expense_id>/delete/', views.delete_expense, name='delete_expense'),
     path('expenses/<int:expense_id>/edit/', views.edit_expenses, name='edit_expenses'),
     path('user_profile/', views.user_profile, name='user_profile'),
+    path('finish_detail/int:<goal_id>',views.finish_detail, name='finish_detail'),
+    path('check_finished_goals/', views.finished_goals, name='finished_goals'),
 
 
 ]

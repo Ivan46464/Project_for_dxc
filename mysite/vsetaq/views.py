@@ -124,7 +124,10 @@ def goal(response):
         wanted_money = form.cleaned_data.get('save_money', 0)
     else:
         wanted_money = 0
-    check_goals1 = Goals.objects.filter(user=response.user).latest('id')
+    if Goals.objects.filter(user=response.user).exists():
+        check_goals1 = Goals.objects.filter(user=response.user).latest('id')
+    else:
+        check_goals1 = None
     how_many = math.ceil(wanted_money/success)
     context = {
         "form": form,
@@ -140,7 +143,7 @@ def goal(response):
 
 
 def check_goals(response):
-    check_goals1 = Goals.objects.filter(user=response.user)
+    check_goals1 = Goals.objects.filter(user=response.user).exclude(finished=True)
     context = {
         'check_goals': check_goals1
     }
@@ -237,3 +240,15 @@ def user_profile(response):
         "amount": amount
     }
     return render(response, "user_profile.html", context)
+
+def finish_detail(response, goal_id):
+    host = response.user
+    goal = get_object_or_404(Goals, id=goal_id, user=host)
+    goal.finished = True
+    goal.save()
+    return redirect('/check_goals', goal_id=goal_id)
+
+def finished_goals(response):
+    goal = Goals.objects.filter(finished=True, user=response.user)
+    context = {'goal':goal}
+    return render(response, 'check_finished_goals.html', context)

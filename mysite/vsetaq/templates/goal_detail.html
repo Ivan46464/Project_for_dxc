@@ -25,6 +25,9 @@
     {% csrf_token %}
     <button type="submit">Delete</button>
   </form>
-
+<form method="POST" action="{% url 'finish_detail' goal_id=goal.id %}">
+    {% csrf_token %}
+    <button type="submit">Finish Goal</button>
+</form>
 <a href="{% url 'check_goals' %}">Back to goals list</a>
 {% endblock %}

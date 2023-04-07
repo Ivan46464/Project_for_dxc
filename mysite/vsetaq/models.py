@@ -27,6 +27,7 @@ class Goals(models.Model):
     user = models.ForeignKey(User, on_delete=CASCADE)
     save_money = models.DecimalField(decimal_places=2, max_digits=50)
     goal = models.CharField(max_length=200, null=False, blank=False, default='')
+    finished = models.BooleanField(default=False)
     updated = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

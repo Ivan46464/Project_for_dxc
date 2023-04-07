@@ -30,7 +30,7 @@ class GoalsForm(ModelForm):
     class Meta:
         model = Goals
         fields = '__all__'
-        exclude = ['user']
+        exclude = ['user', 'finished']
         widgets = {
             'save_money': forms.TextInput(attrs={'class': 'form-control'}),
             'goal': forms.TextInput(attrs={'class': 'form-control'})
